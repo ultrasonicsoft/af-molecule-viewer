@@ -41,6 +41,10 @@ AFRAME.registerComponent('cursor-listener', {
     var lastIndex = -1;
     var COLORS = ['red', 'green', 'blue'];
     this.el.addEventListener('click', function (evt) {
+      const label = document.getElementById('txtLabel');
+      const dataIndex = this.getAttribute("data-index");
+      const value = `value: Selected Molecule:${dataIndex}; color:black`
+      label.setAttribute('text', value);
       console.log('event fired on ....', this.getAttribute("data-index"));
       // lastIndex = (lastIndex + 1) % COLORS.length;
       // this.setAttribute('material', 'color', COLORS[lastIndex]);
