@@ -29,6 +29,7 @@ loader.load('https://raw.githubusercontent.com/rollup/three-jsnext/master/exampl
     scene.appendChild(sphere);
   })
 
+
   for (let i = 0; i < bonds.vertices.length; i = i + 2) {
     const start = bonds.vertices[i]
     const end = bonds.vertices[i + 1]
@@ -36,29 +37,29 @@ loader.load('https://raw.githubusercontent.com/rollup/three-jsnext/master/exampl
     line.setAttribute('line', "start: " + start.x + ", " + start.y + ", " + start.z + "; " + "end: " + end.x + ", " + end.y + ", " + end.z + "; color: black")
     scene.appendChild(line);
   }
-}
-);
 
-AFRAME.registerComponent('cursor-listener', {
-  schema: {
-    on: { type: 'string' },
-    target: { type: 'selector' },
-    src: { type: 'string' },
-    dur: { type: 'number', default: 300 }
-  },
-  init: function () {
-    console.log('event registered....');
-    var lastIndex = -1;
-    var COLORS = ['red', 'green', 'blue'];
-    this.el.addEventListener('mouseenter', function (evt) {
-      const label = document.getElementById('txtLabel');
-      const dataIndex = this.getAttribute("data-index");
-      const value = `value: Selected Molecule:${dataIndex}; color:black`
-      label.setAttribute('text', value);
-      console.log('event fired on ....', this.getAttribute("data-index"));
-      // lastIndex = (lastIndex + 1) % COLORS.length;
-      // this.setAttribute('material', 'color', COLORS[lastIndex]);
-      console.log('I was clicked at: ', evt.detail.intersection.point);
-    });
-  }
+  AFRAME.registerComponent('cursor-listener', {
+    schema: {
+      on: { type: 'string' },
+      target: { type: 'selector' },
+      src: { type: 'string' },
+      dur: { type: 'number', default: 300 }
+    },
+    init: function () {
+      console.log('event registered....');
+      var lastIndex = -1;
+      var COLORS = ['red', 'green', 'blue'];
+      this.el.addEventListener('mouseenter', function (evt) {
+        const label = document.getElementById('txtLabel');
+        const dataIndex = this.getAttribute("data-index");
+        const value = `value: Selected Atom:${atoms.elements[dataIndex]}; color:black`
+        label.setAttribute('text', value);
+        console.log('event fired on ....', this.getAttribute("data-index"));
+        // lastIndex = (lastIndex + 1) % COLORS.length;
+        // this.setAttribute('material', 'color', COLORS[lastIndex]);
+        console.log('I was clicked at: ', evt.detail.intersection.point);
+      });
+    }
+  });
 });
+
