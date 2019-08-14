@@ -34,7 +34,7 @@ loader.load('https://raw.githubusercontent.com/rollup/three-jsnext/master/exampl
     const start = bonds.vertices[i]
     const end = bonds.vertices[i + 1]
     const line = document.createElement('a-entity');
-    line.setAttribute('line', "start: " + start.x + ", " + start.y + ", " + start.z + "; " + "end: " + end.x + ", " + end.y + ", " + end.z + "; color: black")
+    line.setAttribute('line', "start: " + start.x + ", " + start.y + ", " + start.z + "; " + "end: " + end.x + ", " + end.y + ", " + end.z + "; color: white")
     scene.appendChild(line);
   }
 

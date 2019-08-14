@@ -8,6 +8,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/107/three.js"></script>
   <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
   <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+  <script src=""
+    href="https://cdn.rawgit.com/matthewbryancurtis/aframe-star-system-component/db4f1030/index.js></script>"
+    rel="noreferrer noopener" target="_blank"
+    title="https://cdn.rawgit.com/matthewbryancurtis/aframe-star-system-component/db4f1030/index.js>">https://cdn.rawgit.com/matthewbryancurtis/aframe-star-system-component/db4f1030/index.js></script>
+
 </head>
 
 <body>
@@ -19,8 +24,8 @@
     <a-entity camera look-controls>
       <a-entity cursor="fuse: true;" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
         material="color: black; shader: flat">
-        <a-text id="cylinderText" position=" 0 .65 -3" value="This is a cylinder" align="center" color="white"
-          visible="false" geometry="primitive: plane; width: 1; height:0.5" material="color:black"></a-text>
+        <a-text id="cylinderText" position=" 0 .65 -3" value="This is a cylinder" align="center" color="black"
+          visible="false" geometry="primitive: plane; width: 1; height:0.5" material="color:white"></a-text>
       </a-entity>
 
     </a-entity>
@@ -28,7 +33,10 @@
     <a-entity position="-1 0.5 -5" id="scene">
     </a-entity>
     <!--     <a-entity id="txtLabel" text="value: Selected Molecule:{0}; color:black" position="0 0 -1"></a-entity> -->
-    <a-sky color="#ECECEC"></a-sky>
+    <!--     <a-sky color="#ECECEC"></a-sky> -->
+    <a-sky color="#00001f"></a-sky>
+    <a-entity star-system></a-entity>
+
   </a-scene>
 </body>
 
