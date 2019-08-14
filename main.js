@@ -13,14 +13,18 @@ loader.load('https://raw.githubusercontent.com/rollup/three-jsnext/master/exampl
   const scene = document.querySelector('#scene');
 
   let index = 0;
+  console.log(atoms)
   atoms.vertices.forEach((position, i) => {
     const sphere = document.createElement('a-sphere');
     sphere.setAttribute('position', position.x + " " + position.y + " " + position.z)
     sphere.setAttribute('radius', "0.4")
     sphere.setAttribute('shadow', true)
     sphere.setAttribute('color', rgbToHex(atoms.colors[i]))
-    sphere.setAttribute('cursor-listener', '');
+    sphere.setAttribute('cursor-listener', 'on: mouseenter;');
     sphere.setAttribute('data-index', index);
+    //     sphere.setAttribute('event-set__enter', `_event: mouseenter; _target: #cylinderText; visible: true; value:${atoms.elements[i]} Atom`);
+
+    //     sphere.setAttribute('event-set__leave', "_event: mouseleave; _target: #cylinderText; visible: true");
     index++;
     scene.appendChild(sphere);
   })
@@ -36,11 +40,17 @@ loader.load('https://raw.githubusercontent.com/rollup/three-jsnext/master/exampl
 );
 
 AFRAME.registerComponent('cursor-listener', {
+  schema: {
+    on: { type: 'string' },
+    target: { type: 'selector' },
+    src: { type: 'string' },
+    dur: { type: 'number', default: 300 }
+  },
   init: function () {
     console.log('event registered....');
     var lastIndex = -1;
     var COLORS = ['red', 'green', 'blue'];
-    this.el.addEventListener('click', function (evt) {
+    this.el.addEventListener('mouseenter', function (evt) {
       const label = document.getElementById('txtLabel');
       const dataIndex = this.getAttribute("data-index");
       const value = `value: Selected Molecule:${dataIndex}; color:black`
