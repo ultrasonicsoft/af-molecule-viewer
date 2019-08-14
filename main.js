@@ -9,11 +9,15 @@ function rgbToHex({ r, g, b }) {
   return "#" + toHex(r) + toHex(g) + toHex(b);
 }
 
-loader.load('https://raw.githubusercontent.com/rollup/three-jsnext/master/examples/models/molecules/caffeine.pdb', function (atoms, bonds) {
+// loader.load('https://raw.githubusercontent.com/rollup/three-jsnext/master/examples/models/molecules/caffeine.pdb', function (atoms, bonds) {
+//   const scene = document.querySelector('#scene');
+var draw = function (atoms, bonds) {
   const scene = document.querySelector('#scene');
+  scene.innerHTML = "";
+  delete AFRAME.components['cursor-listener'];
 
   let index = 0;
-  console.log(atoms)
+  console.log('atoms: ', atoms);
   atoms.vertices.forEach((position, i) => {
     const sphere = document.createElement('a-sphere');
     sphere.setAttribute('position', position.x + " " + position.y + " " + position.z)
@@ -23,9 +27,9 @@ loader.load('https://raw.githubusercontent.com/rollup/three-jsnext/master/exampl
     sphere.setAttribute('cursor-listener', 'on: mouseenter;');
     sphere.setAttribute('data-index', index);
     sphere.setAttribute('id', 'sphere-' + index);
-    sphere.setAttribute('event-set__enter', `_event: mouseenter; _target: #cylinderText; visible: true; value:${atoms.elements[i]} Atom`);
+    //     sphere.setAttribute('event-set__enter', `_event: mouseenter; _target: #cylinderText; visible: true; value:${atoms.elements[i]} Atom`);
 
-    sphere.setAttribute('event-set__leave', "_event: mouseleave; _target: #cylinderText; visible: true");
+    //     sphere.setAttribute('event-set__leave', "_event: mouseleave; _target: #cylinderText; visible: true");
     index++;
     scene.appendChild(sphere);
 
@@ -34,6 +38,8 @@ loader.load('https://raw.githubusercontent.com/rollup/three-jsnext/master/exampl
     text.setAttribute('position', position.x + " " + position.y + " " + position.z + 0.4);
     text.setAttribute('value', atoms.elements[i]);
     text.setAttribute('color', 'yellow');
+    text.setAttribute('height', 8);
+    text.setAttribute('width', 8);
     scene.appendChild(text);
   })
 
@@ -58,6 +64,20 @@ loader.load('https://raw.githubusercontent.com/rollup/three-jsnext/master/exampl
       var lastIndex = -1;
       var COLORS = ['red', 'green', 'blue'];
       this.el.addEventListener('mouseenter', function (evt) {
+        this.setAttribute('radius', 0.6);
+        // const label = document.getElementById('txtLabel');
+        // const dataIndex = this.getAttribute("data-index");
+        // const value = `value: Selected Atom:${atoms.elements[dataIndex]}; color:black`
+        // label.setAttribute('text', value);
+        console.log('event fired on ....', this.getAttribute("data-index"));
+
+        // lastIndex = (lastIndex + 1) % COLORS.length;
+        // this.setAttribute('material', 'color', COLORS[lastIndex]);
+        // console.log('I was clicked at: ', evt.detail.intersection.point);
+      });
+
+      this.el.addEventListener('mouseleave', function (evt) {
+        this.setAttribute('radius', 0.4);
         // const label = document.getElementById('txtLabel');
         // const dataIndex = this.getAttribute("data-index");
         // const value = `value: Selected Atom:${atoms.elements[dataIndex]}; color:black`
@@ -65,9 +85,30 @@ loader.load('https://raw.githubusercontent.com/rollup/three-jsnext/master/exampl
         console.log('event fired on ....', this.getAttribute("data-index"));
         // lastIndex = (lastIndex + 1) % COLORS.length;
         // this.setAttribute('material', 'color', COLORS[lastIndex]);
-        console.log('I was clicked at: ', evt.detail.intersection.point);
+        // console.log('I was clicked at: ', evt.detail.intersection.point);
       });
     }
   });
+};
+
+const mols = { 'caffeine': 'https://raw.githubusercontent.com/rollup/three-jsnext/master/examples/models/molecules/caffeine.pdb', 'ethanol': 'https://raw.githubusercontent.com/rollup/three-jsnext/master/examples/models/molecules/ethanol.pdb' }
+loader.load(mols['caffeine'], draw);
+
+
+
+AFRAME.registerComponent('menu', {
+  init: function () {
+    let val = 'caffeine'
+    this.el.addEventListener('mouseenter', (evt) => {
+      const mol = evt.target.getAttribute('value').toLowerCase();
+      if (mol !== val) {
+        val = mol;
+        loader.load(mols[mol], draw);
+      }
+    });
+  }
 });
+
+
+
 
