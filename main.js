@@ -22,9 +22,9 @@ loader.load('https://raw.githubusercontent.com/rollup/three-jsnext/master/exampl
     sphere.setAttribute('color', rgbToHex(atoms.colors[i]))
     sphere.setAttribute('cursor-listener', 'on: mouseenter;');
     sphere.setAttribute('data-index', index);
-    //     sphere.setAttribute('event-set__enter', `_event: mouseenter; _target: #cylinderText; visible: true; value:${atoms.elements[i]} Atom`);
+    sphere.setAttribute('event-set__enter', `_event: mouseenter; _target: #cylinderText; visible: true; value:${atoms.elements[i]} Atom`);
 
-    //     sphere.setAttribute('event-set__leave', "_event: mouseleave; _target: #cylinderText; visible: true");
+    sphere.setAttribute('event-set__leave', "_event: mouseleave; _target: #cylinderText; visible: true");
     index++;
     scene.appendChild(sphere);
   })
@@ -50,10 +50,10 @@ loader.load('https://raw.githubusercontent.com/rollup/three-jsnext/master/exampl
       var lastIndex = -1;
       var COLORS = ['red', 'green', 'blue'];
       this.el.addEventListener('mouseenter', function (evt) {
-        const label = document.getElementById('txtLabel');
-        const dataIndex = this.getAttribute("data-index");
-        const value = `value: Selected Atom:${atoms.elements[dataIndex]}; color:black`
-        label.setAttribute('text', value);
+        // const label = document.getElementById('txtLabel');
+        // const dataIndex = this.getAttribute("data-index");
+        // const value = `value: Selected Atom:${atoms.elements[dataIndex]}; color:black`
+        // label.setAttribute('text', value);
         console.log('event fired on ....', this.getAttribute("data-index"));
         // lastIndex = (lastIndex + 1) % COLORS.length;
         // this.setAttribute('material', 'color', COLORS[lastIndex]);
