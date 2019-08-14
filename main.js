@@ -22,11 +22,19 @@ loader.load('https://raw.githubusercontent.com/rollup/three-jsnext/master/exampl
     sphere.setAttribute('color', rgbToHex(atoms.colors[i]))
     sphere.setAttribute('cursor-listener', 'on: mouseenter;');
     sphere.setAttribute('data-index', index);
+    sphere.setAttribute('id', 'sphere-' + index);
     sphere.setAttribute('event-set__enter', `_event: mouseenter; _target: #cylinderText; visible: true; value:${atoms.elements[i]} Atom`);
 
     sphere.setAttribute('event-set__leave', "_event: mouseleave; _target: #cylinderText; visible: true");
     index++;
     scene.appendChild(sphere);
+
+    const text = document.createElement('a-text');
+    text.setAttribute('id', 'atom-' + index);
+    text.setAttribute('position', position.x + " " + position.y + " " + position.z + 0.4);
+    text.setAttribute('value', atoms.elements[i]);
+    text.setAttribute('color', 'yellow');
+    scene.appendChild(text);
   })
 
 
