@@ -99,6 +99,8 @@ loader.load(mols['caffeine'], draw);
 AFRAME.registerComponent('menu', {
   init: function () {
     let val = 'caffeine'
+    console.log('menu event registered...');
+
     this.el.addEventListener('mouseenter', (evt) => {
       const mol = evt.target.getAttribute('value').toLowerCase();
       if (mol !== val) {
@@ -108,6 +110,54 @@ AFRAME.registerComponent('menu', {
     });
   }
 });
+
+
+AFRAME.registerComponent('text-view', {
+  init: function () {
+    console.log('view-menu event registered...');
+    this.el.addEventListener('mouseenter', (evt) => {
+      const allSphere = document.getElementsByTagName('a-sphere');
+      for (var index = 0; index < allSphere.length; index++) {
+        allSphere[index].setAttribute('visible', false);
+      }
+      const allTexts = document.getElementsByTagName('a-text');
+
+      for (var index = 0; index < allTexts.length; index++) {
+        if (allTexts[index].getAttribute('id') != 'menu1' ||
+          allTexts[index].getAttribute('id') != 'menu2' ||
+          allTexts[index].getAttribute('id') != 'bubble-view' ||
+          allTexts[index].getAttribute('id') != 'text-view') {
+          continue;
+        }
+        allTexts[index].setAttribute('visible', true);
+      }
+    });
+  }
+});
+
+AFRAME.registerComponent('bubble-view', {
+  init: function () {
+    console.log('view-menu event registered...');
+    this.el.addEventListener('mouseenter', (evt) => {
+      const allSphere = document.getElementsByTagName('a-sphere');
+      for (var index = 0; index < allSphere.length; index++) {
+        allSphere[index].setAttribute('visible', true);
+      }
+      const allTexts = document.getElementsByTagName('a-text');
+
+      for (var index = 0; index < allTexts.length; index++) {
+        if (allTexts[index].getAttribute('id') != 'menu1' ||
+          allTexts[index].getAttribute('id') != 'menu2' ||
+          allTexts[index].getAttribute('id') != 'bubble-view' ||
+          allTexts[index].getAttribute('id') != 'text-view') {
+          continue;
+        }
+        allTexts[index].setAttribute('visible', false);
+      }
+    });
+  }
+});
+
 
 
 

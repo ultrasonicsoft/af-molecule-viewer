@@ -34,14 +34,17 @@
 
     </a-entity>
 
+    <a-entity position="3 0 -5" id="view-menu" rotation="0 -30 0">
+      <a-text bubble-view id="bubble-view" position=" 0 0 -3" align="center" color="#FFF" visible="true"
+        geometry="primitive: plane;width: 1.75" value="Bubble View" material="color: #333"> </a-text>
+      <a-text text-view id="text-view" position=" 0 -2 -3" align="center" color="#FFF" visible="true"
+        geometry="primitive: plane;width: 1.75" value="Text View" material="color: #333"></a-text>
+    </a-entity>
 
     <a-entity position="-1 0.5 -8" id="scene" rotation="0 0 0"
       animation="property: rotation; to: 0 360 0; loop: true; dur: 30000;resumeEvents:mouseenter">
-      <!--     <a-entity gearvr-controls position="-1 0.5 -5" id="scene" rotation="0 0 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 50000;resumeEvents:mouseenter"> -->
 
     </a-entity>
-    <!--     <a-entity id="txtLabel" text="value: Selected Molecule:{0}; color:black" position="0 0 -1"></a-entity> -->
-    <!--     <a-sky color="#ECECEC"></a-sky> -->
 
 
     <a-entity star-system></a-entity>
